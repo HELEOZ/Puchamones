@@ -1,112 +1,59 @@
+import javax.swing.JOptionPane;
 import java.io.*;
-import java.util.Scanner;
 
-/**
- * Class Usuario
- */
-public class Usuario {
-
-  //
-  // Fields
-  //
-  private String Nombre;
-  private String Clave;
-
-  private int opcion;
-  //
-  // Constructors
-  //
-  Scanner sc = new Scanner(System.in);
-  public Usuario (String nombre, String clave) {
-    this.Nombre = nombre;
-    this.Clave = clave;
-
-
-  };
-  //
-  // Methods
-  //
-  //
-  // Accessor methods
-  //
-
-  /**
-   * Set the value of Nombre
-   * @param newVar the new value of Nombre
-   */
-  public void setNombre (String newVar) {
-    Nombre = newVar;
-  } //leer valores
-  /**
-   * Get the value of Nombre
-   * @return the value of Nombre
-   */
-  public String getNombre () {
-    return Nombre;
-  } //
-
-  /**
-   * Set the value of Clave
-   * @param newVar the new value of Clave
-   */
-  public void setClave (String newVar) {
-    Clave = newVar;
+public abstract class  Usuario {
+  private String nombre;
+  private String clave;
+  public Usuario() {
+    nombre = "";
+    clave = "";
+  }
+  public String getNombre() {
+    return nombre;
   }
 
-  /**
-   * Get the value of Clave
-   * @return the value of Clave
-   */
-  public String getClave () {
-    return Clave;
+  public String getClave() {
+    return clave;
   }
-  //
-  // Other methods
-  //
-  /**
-   * @param        nombre
-   */
-  public void agregarUsuario(String nombre,String Clave)
-  {
-    try {
-      BufferedWriter writer = new BufferedWriter(new FileWriter("usuarios.txt", true));
-      writer.write(nombre + "," + Clave);
-      writer.newLine();
-      writer.close();
-      System.out.println("Usuario agregado correctamente.");
-    } catch (IOException e) {
-      System.out.println("Ocurrió un error al agregar el usuario.");
-      e.printStackTrace();
 
+  public void registrarse() {
+    nombre = JOptionPane.showInputDialog(null, "Ingrese su nombre:");
+    clave = JOptionPane.showInputDialog(null, "Ingrese su clave:");
+    if (nombre == null || clave == null) {
+      return; // Salir del método si el usuario presiona "Cancelar"
     }
+    agregarDatos("Nombre", nombre);
+    JOptionPane.showMessageDialog(null,  "Iniciando interface de juego(consola))");
+    System.out.println("Bienvenido " + nombre + " a la batalla de Puchamones");
   }
-  /**
-   * @param        Clave
-   */
-  public boolean autenticarUsuario(String nombre,String Clave) {
-    try {
-      BufferedReader reader = new BufferedReader(new FileReader("usuarios.txt"));
-      String linea;
-      while ((linea = reader.readLine()) != null) {
-        String[] partes = linea.split(",");
-        if (partes[0].equals(nombre) && partes[1].equals(Clave)) {
-          reader.close();
-          return true;
-        }
+
+  public void iniciarSesion() {
+      nombre = JOptionPane.showInputDialog(null, "Ingrese su nombre:");
+      clave = JOptionPane.showInputDialog(null, "Ingrese su clave:");
+      if (nombre == null || clave == null) {
+        return; // Salir del método si el usuario presiona "Cancelar"
       }
-      reader.close();
-    } catch (IOException e) {
-      System.out.println("Ocurrió un error al leer el archivo de usuarios.");
-      e.printStackTrace();
+        if (buscarArchivo() == false) {
+          JOptionPane.showMessageDialog(null, "El Nombre de Usuario o la contraseña son incorrectas", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
-    return false;
+  public boolean buscarArchivo() {
+    String archivo = nombre + "," + clave + ".txt"; // nombre del archivo
+    File f = new File(archivo);
+    if (f.exists() && !f.isDirectory()) {
+      return true; // si el archivo existe y no es un directorio, retorna verdadero
+    }
+    return false; // si no, retorna falso
   }
-  /**
-   * @param        nombre
-   */
-  public void Bienvenida(String nombre){
-
+  public void agregarDatos(String NombreAtributo, String valor) {
+    String archivo = nombre + "," + clave + ".txt"; // nombre del archivo
+    try {
+      FileWriter fw = new FileWriter(archivo, true);
+      fw.write(NombreAtributo + ": " + valor + "\n");
+      fw.close();
+    } catch (IOException e) {
+      System.err.println("Error al Guardar los datos");
+    }
   }
-
 
 }

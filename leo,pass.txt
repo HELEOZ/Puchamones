@@ -1,0 +1,4 @@
+Nombre: leo
+Dinero: 2000.0
+Nivel : 1
+Experiencia : 1
