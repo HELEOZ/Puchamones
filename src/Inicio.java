@@ -1,35 +1,22 @@
 import javax.swing.*;
-import java.util.Scanner;
+//todo https://docs.oracle.com/javase/7/docs/api/javax/swing/JOptionPane.html
 public class Inicio {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        boolean seguir=true;
-        String[] tipoConversor ={"Registrarme","Iniciar sesión"};
+        boolean repetir= false;
+        Jugador jugador = new Jugador();
+        String[] tipoConversor = {"Registrarme", "Iniciar sesión"};
 
-        int Menu = JOptionPane.showOptionDialog(null,"Jugador Nuevo o ya existente:","Convertidores",
-                JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,tipoConversor,tipoConversor[1]);
-        String input;
-        input = JOptionPane.showInputDialog(null, "Ingrese Usuario");
+            int menu = JOptionPane.showOptionDialog(null, "Jugador Nuevo o Tengo una Cuenta:", "Convertidores",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, tipoConversor, tipoConversor[1]);
+            if (menu == 0) {
+                ((Usuario)jugador).registrarse();
+                jugador.Bienvenida();
+            } else if (menu == 1) {
+                jugador.iniciarSesion();
+                if (jugador.buscarArchivo()) {
+                    jugador.mostrarDatos();
+                }
+            }
 
-        while (seguir==true){
-            if (Menu == 0) {
-                System.out.println("Ingresa tu nombre:");
-                String nombre = scanner.next();
-                System.out.println("Ingresa una contraseña:");
-                String clave = scanner.next();
-                Usuario usuario = new Usuario(nombre,clave);
-            }
-            else if (Menu == 1){
-                System.out.println("Ingresa tu nombre:");
-                String nombre = scanner.next();
-                System.out.println("Ingresa una contraseña:");
-                String clave = scanner.next();
-                Usuario usuario = new Usuario(nombre,clave);
-            }
-            else {
-                seguir=false;
-                System.out.println("Opción inválida");
-            }
-        }
     }
 }

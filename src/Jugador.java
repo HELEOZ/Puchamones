@@ -1,122 +1,50 @@
-
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 /**
  * Class Jugador
  */
-public class Jugador {
-
-  //
-  // Fields
-  //
-
-  private String Nombre;
+public class Jugador extends Usuario {
   private double Dinero;
-  private int Equipo;
+  private String[] Equipo;
   private int Experiencia;
   private int Nivel;
-  
   //
   // Constructors
   //
-  public Jugador () { };
-  
-  //
-  // Methods
-  //
+  public Jugador () {
 
+  };
 
-  //
-  // Accessor methods
-  //
-
-  /**
-   * Set the value of Nombre
-   * @param newVar the new value of Nombre
-   */
-  public void setNombre (String newVar) {
-    Nombre = newVar;
+  public void Bienvenida(){
+    Dinero=2000;
+    Nivel=1;
+    Experiencia=1;
+    agregarDatos("Dinero", String.valueOf(Dinero));
+    agregarDatos("Nivel ", String.valueOf(Nivel));
+    agregarDatos("Experiencia ", String.valueOf(Experiencia));
+    mostrarDatos();
+    System.out.println("Necesitas 3 puchamones para iniciar");
+    crearPuchamon();
   }
+  public void mostrarDatos() {
+      String archivo = getNombre() + "," + getClave() + ".txt";
+      try {
+        BufferedReader br = new BufferedReader(new FileReader(archivo));
+        String linea;
+        while ((linea = br.readLine()) != null) {
+          System.out.println(linea);
+        }
+        br.close();
+      } catch (IOException e) {
+        System.err.println("Error al leer el archivo");
+      }
+    }
 
-  /**
-   * Get the value of Nombre
-   * @return the value of Nombre
-   */
-  public String getNombre () {
-    return Nombre;
-  }
-
-  /**
-   * Set the value of Dinero
-   * @param newVar the new value of Dinero
-   */
-  public void setDinero (double newVar) {
-    Dinero = newVar;
-  }
-
-  /**
-   * Get the value of Dinero
-   * @return the value of Dinero
-   */
-  public double getDinero () {
-    return Dinero;
-  }
-
-  /**
-   * Set the value of Equipo
-   * @param newVar the new value of Equipo
-   */
-  public void setEquipo (int newVar) {
-    Equipo = newVar;
-  }
-
-  /**
-   * Get the value of Equipo
-   * @return the value of Equipo
-   */
-  public int getEquipo () {
-    return Equipo;
-  }
-
-  /**
-   * Set the value of Experiencia
-   * @param newVar the new value of Experiencia
-   */
-  public void setExperiencia (int newVar) {
-    Experiencia = newVar;
-  }
-
-  /**
-   * Get the value of Experiencia
-   * @return the value of Experiencia
-   */
-  public int getExperiencia () {
-    return Experiencia;
-  }
-
-  /**
-   * Set the value of Nivel
-   * @param newVar the new value of Nivel
-   */
-  public void setNivel (int newVar) {
-    Nivel = newVar;
-  }
-
-  /**
-   * Get the value of Nivel
-   * @return the value of Nivel
-   */
-  public int getNivel () {
-    return Nivel;
-  }
-
-  //
-  // Other methods
-  //
-
-  /**
-   */
   public void crearPuchamon()
   {
+
   }
 
 
