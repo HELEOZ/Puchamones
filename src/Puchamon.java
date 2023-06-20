@@ -1,5 +1,3 @@
-
-
 /**
  * Class Puchamon
  */
@@ -11,7 +9,7 @@ public class Puchamon {
     //
 
     private String nombre;
-    int[] tipos = new int[3];
+    private String tipos;
     private int ataque;
     private int defensa;
     private int nivel;
@@ -34,7 +32,7 @@ public class Puchamon {
     //
     public Puchamon(String nombre, String tipo) {
         this.nombre = nombre;
-        // this.tipos = tipo;
+        this.tipos = tipo;
         this.ataque = ATAQUE_INICIAL + (int) (Math.random() * (101 - ATAQUE_INICIAL));
         this.defensa = DEFENSA_INICIAL + (int) (Math.random() * (101 - DEFENSA_INICIAL));
         this.vida = VIDA_INICIAL;
@@ -70,8 +68,20 @@ public class Puchamon {
         return nombre;
     }
 
-    public void setTipos(int[] tipos) {
-        this.tipos = tipos;
+    /**
+     * Set the value of tipo
+     * @param newVar the new value of tipo
+     */
+    public void setTipo (String newVar) {
+        tipos = newVar;
+    }
+
+    /**
+     * Get the value of tipo
+     * @return the value of tipo
+     */
+    public String getTipo () {
+        return tipos;
     }
 
     /**

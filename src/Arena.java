@@ -1,5 +1,3 @@
-
-
 /**
  * Class Arena
  */
@@ -42,5 +40,4 @@ public class Arena {
     }
     return false;
   }
-
 }

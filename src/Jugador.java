@@ -20,7 +20,7 @@ public class Jugador extends Usuario {
     private int Experiencia;
     private int Nivel;
 
-    private int LimitePuchamon=0;
+    private int con=0;
 
     Scanner scanner =new Scanner(System.in);
     //
@@ -182,17 +182,17 @@ public class Jugador extends Usuario {
     /**
      */
     public void AgregarPuchamon() {
-        if ( LimitePuchamon >= 0 && LimitePuchamon < 3){
+        if ( con >= 0 && con < 3){
             String nombre;
             String tipo="";
             System.out.println("Nombre del Puchamon");
             nombre = scanner.next();
-            System.out.println(" Tipos: Tierra, Agua, Aire, Fuego");
+            System.out.println("Tipos: Tierra, Agua, Aire, Fuego");
             tipo = scanner.next().toUpperCase();
             if(tipo == "TIERRA" || tipo == "AGUA" || tipo=="AIRE" || tipo=="FUEGO"){
-                Puchamon nuevoPuchamon = new Puchamon(nombre, tipo);
+                Puchamon nuevoPuchamon = new Puchamon(nombre, String.valueOf(tipo));
                 agregarDatos("Puchamon",tipo);
-                LimitePuchamon++;
+                con++;
             }
             else {
                 System.out.println("No a agregado un tipo valido");
@@ -218,5 +218,4 @@ public class Jugador extends Usuario {
 
     /**
      */
-
 }
