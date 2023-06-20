@@ -1,11 +1,22 @@
+
+
+/**
+ * Class Puchamon
+ */
+//Todo https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/Random.html
 public class Puchamon {
+
+    //
+    // Fields
+    //
+
     private String nombre;
-    private String tipo;
+    int[] tipos = new int[3];
     private int ataque;
     private int defensa;
+    private int nivel;
     private int vida;
     private int experiencia;
-    private int nivel;
     private int cantidadCombates;
     private int combatesGanados;
     private int combatesPerdidos;
@@ -17,21 +28,118 @@ public class Puchamon {
     private static final double INCREMENTO_ATAQUE_DEFENSA = 0.2;
     private static final int INCREMENTO_NIVEL_VIDA = 50;
     private static final int MIN_APUESTA = 100;
-
-
+    private static final double EXP_NECESARIA_SUBIR_NIVEL = 100.0;
+    //
+    // Constructors
+    //
     public Puchamon(String nombre, String tipo) {
         this.nombre = nombre;
-        this.tipo = tipo;
+        // this.tipos = tipo;
         this.ataque = ATAQUE_INICIAL + (int) (Math.random() * (101 - ATAQUE_INICIAL));
         this.defensa = DEFENSA_INICIAL + (int) (Math.random() * (101 - DEFENSA_INICIAL));
         this.vida = VIDA_INICIAL;
         this.experiencia = 0;
-        this.nivel = 0;
+        this.nivel = 1;
         this.cantidadCombates = 0;
         this.combatesGanados = 0;
         this.combatesPerdidos = 0;
     }
 
+    //
+    // Methods
+    //
+
+
+    //
+    // Accessor methods
+    //
+
+    /**
+     * Set the value of Nombre
+     * @param newVar the new value of Nombre
+     */
+    public void setNombre (String newVar) {
+        nombre = newVar;
+    }
+
+    /**
+     * Get the value of Nombre
+     * @return the value of Nombre
+     */
+    public String getNombre () {
+        return nombre;
+    }
+
+    public void setTipos(int[] tipos) {
+        this.tipos = tipos;
+    }
+
+    /**
+     * Set the value of ataque
+     * @param newVar the new value of ataque
+     */
+    public void setAtaque (int newVar) {
+        ataque = newVar;
+    }
+
+    /**
+     * Get the value of ataque
+     * @return the value of ataque
+     */
+    public int getAtaque () {
+        return ataque;
+    }
+
+    /**
+     * Set the value of Defensa
+     * @param newVar the new value of Defensa
+     */
+    public void setDefensa (int newVar) {
+        defensa = newVar;
+    }
+
+    /**
+     * Get the value of Defensa
+     * @return the value of Defensa
+     */
+    public int getDefensa () {
+        return defensa;
+    }
+
+    /**
+     * Set the value of nivel
+     * @param newVar the new value of nivel
+     */
+    public void setNivel (int newVar) {
+        nivel = newVar;
+    }
+
+    /**
+     * Get the value of nivel
+     * @return the value of nivel
+     */
+    public int getNivel () {
+        return nivel;
+    }
+
+    /**
+     * Set the value of vida
+     * @param newVar the new value of vida
+     */
+    public void setVida (int newVar) {
+        vida = newVar;
+    }
+
+    /**
+     * Get the value of vida
+     * @return the value of vida
+     */
+    public int getVida () {
+        return vida;
+    }
+
+    /**
+     */
     public void subirNivel() {
         this.nivel++;
         this.experiencia = 0;
@@ -40,38 +148,32 @@ public class Puchamon {
         this.defensa += (int) ((nivel + 1) * INCREMENTO_ATAQUE_DEFENSA);
     }
 
-    public int getAtaque() {
-        return ataque;
+
+    /**
+     * @param vidaRestante
+     */
+    public void ganarCombate(int vidaRestante) {
+        this.experiencia += vidaRestante / EXP_NECESARIA_SUBIR_NIVEL;
+        this.combatesGanados++;
+        this.cantidadCombates++;
+        if (this.experiencia >= EXP_SUBIR_NIVEL) {
+            subirNivel();
+        }
     }
 
-    public int getDefensa() {
-        return defensa;
+    /**
+     */
+    public void perderCombate() {
+        this.combatesPerdidos++;
+        this.cantidadCombates++;
     }
 
-    public void reducirVida(int cantidad) {
-        vida -= cantidad;
-    }
-
+    /**
+     * @return       boolean
+     */
     public boolean estaVivo() {
         return vida > 0;
     }
-
-    public void reiniciarVida() {
-        vida = vidaMaxima;
-    }
+    /**
+     */
 }
-/*
-public class Jugador {
-    public void crearPuchamon(String nombre, String tipo) {
-        // Generar valores aleatorios para ataque y defensa
-        int ataque = (int) (Math.random() * 51) + 50; // Valores entre 50 y 100
-        int defensa = (int) (Math.random() * 51) + 50; // Valores entre 50 y 100
-
-        // para crear instancia de la clase Puchamon con los valores generados y los demás atributos en 0
-        Puchamon nuevoPuchamon = new Puchamon(nombre, tipo, ataque, defensa, 0, 0, 0, 0);
-
-        // y creo que se podria agregar el nuevo Puchamon al equipo del jugador asi...
-        equipo.add(nuevoPuchamon);
-    }
-}
-*/
