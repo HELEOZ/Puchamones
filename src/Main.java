@@ -8,7 +8,7 @@ public class Main {
         boolean repetir= false;
         Jugador jugador = new Jugador();
         String[] login = {"Registrarme", "Iniciar sesión","Salir"};
-        //prueba de github
+        //Probando conexion de github
         while (!repetir){
             int menu = JOptionPane.showOptionDialog(null, "Jugador Nuevo o Tengo una Cuenta:", "Login",
                     JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, login, login[2]);
